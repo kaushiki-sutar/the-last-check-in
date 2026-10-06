@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Last Check-In | Mystery Escape Room</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<main>
+    <!-- Opening screen -->
+    <section id="welcome-screen" class="welcome-screen"
+             aria-labelledby="welcome-title">
+
+        <header class="hotel-header">
+            <a href="index.html" class="hotel-name">
+                The Last Check-In
+            </a>
+
+            <p class="hotel-tagline">
+                Established 1926. Expecting you ever since.
+            </p>
+        </header>
+
+        <div class="welcome-content">
+            <p class="eyebrow">An interactive mystery escape room</p>
+
+            <h1 id="welcome-title">We’ve kept your room.</h1>
+
+            <p class="welcome-description">
+                A storm outside. An empty reception.
+                A reservation you don’t remember making.
+            </p>
+
+            <p class="welcome-story">
+                Through the rain, you spot a hotel with its lights still on.
+                The entrance opens before you knock. Somewhere inside,
+                a reception bell rings—but nobody is behind the desk.
+            </p>
+
+            <button type="button" id="check-in-btn" class="primary-btn">
+                Check in
+            </button>
+
+            <p class="game-info">
+                About 5 minutes · Explore at your own pace
+            </p>
+        </div>
+
+        <aside class="instructions" aria-labelledby="instructions-title">
+            <h2 id="instructions-title">Before you enter</h2>
+
+            <ul>
+                <li>Inspect objects to discover clues.</li>
+                <li>Connect the clues to open a locked drawer.</li>
+                <li>Find the emergency exit key and escape.</li>
+            </ul>
+
+            <p>Look closely. The hotel has been waiting.</p>
+        </aside>
+
+        <footer class="welcome-footer">
+            <p>A short mystery. A very long night.</p>
+        </footer>
+    </section>
+<!-- Reception screen -->
+<section id="reception-screen" class="reception-screen"
+         aria-labelledby="reception-title" hidden>
+
+    <header class="reception-header">
+        <p class="eyebrow">The Last Check-In · Chapter One</p>
+        <h2 id="reception-title" tabindex="-1">The Empty Reception</h2>
+
+        <p class="reception-description">
+            The entrance clicks shut behind you.
+            A lamp flickers above the counter.
+            Everything is covered in dust—except an envelope.
+        </p>
+    </header>
+
+    <div class="game-status">
+        <p>
+            <strong>Your objective:</strong>
+            Find the emergency exit key.
+        </p>
+
+        <p id="key-status" role="status">Exit key: Not found</p>
+    </div>
+
+    <!-- Objects the player can inspect -->
+    <div class="objects-grid">
+
+        <button type="button" id="envelope-btn" class="object-card">
+            <span class="object-icon" aria-hidden="true">✉️</span>
+            <span class="object-name">The Envelope</span>
+            <span class="object-description">
+                Your name is written in unfamiliar handwriting.
+            </span>
+        </button>
+
+        <button type="button" id="register-btn" class="object-card">
+            <span class="object-icon" aria-hidden="true">📖</span>
+            <span class="object-name">Guest Register</span>
+            <span class="object-description">
+                An old book lies open beside the reception bell.
+            </span>
+        </button>
+
+        <button type="button" id="clock-btn" class="object-card">
+            <span class="object-icon" aria-hidden="true">🕰️</span>
+            <span class="object-name">Wall Clock</span>
+            <span class="object-description">
+                Its hands have stopped. The ticking hasn’t.
+            </span>
+        </button>
+
+        <button type="button" id="drawer-btn" class="object-card">
+            <span class="object-icon" aria-hidden="true">🔒</span>
+            <span class="object-name">Locked Drawer</span>
+            <span class="object-description">
+                A brass lock requires a three-digit code.
+            </span>
+        </button>
+
+    </div>
+
+    <div class="exit-area">
+        <p>
+            Beyond the counter stands a door marked “Emergency Exit.”
+        </p>
+
+        <button type="button" id="exit-btn" class="primary-btn" disabled>
+            Exit locked — find the key
+        </button>
+    </div>
+</section>
+
+<!-- Reusable window for inspecting objects -->
+<dialog id="inspection-dialog" class="inspection-dialog"
+        aria-labelledby="inspection-title">
+
+    <div class="inspection-content">
+        <p class="eyebrow">Look a little closer</p>
+
+        <h2 id="inspection-title">Inspect object</h2>
+
+        <!-- JavaScript will insert the selected object's description -->
+        <div id="inspection-details" class="inspection-details"></div>
+
+        <!-- Only shown when inspecting the locked drawer -->
+        <form id="drawer-form" class="drawer-form" hidden>
+            <label for="drawer-code">Enter the three-digit code</label>
+
+            <p id="code-help">
+                Somewhere in this reception, the guests left you an answer.
+            </p>
+
+            <input
+                type="text"
+                id="drawer-code"
+                name="drawer-code"
+                inputmode="numeric"
+                pattern="[0-9]{3}"
+                minlength="3"
+                maxlength="3"
+                placeholder="000"
+                aria-describedby="code-help"
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit" class="primary-btn">
+                Unlock drawer
+            </button>
+
+            <p id="code-feedback" class="code-feedback" role="status"></p>
+        </form>
+
+        <!-- Revealed after the drawer is unlocked -->
+        <div id="drawer-reward" class="drawer-reward" hidden>
+            <p>
+                The lock clicks open. Inside lies a brass key
+                and a faded photograph.
+            </p>
+
+            <p>
+                The photograph shows this very reception.
+                On the back, someone has written:
+                “Our expected guest, 1926.”
+            </p>
+
+            <button type="button" id="collect-key-btn" class="primary-btn">
+                Collect the exit key
+            </button>
+        </div>
+
+        <button type="button" id="close-inspection-btn"
+                class="secondary-btn">
+            Back to reception
+        </button>
+    </div>
+
+</dialog>
+<!-- Ending screen -->
+<section id="ending-screen" class="ending-screen"
+         aria-labelledby="ending-title" hidden>
+
+    <header class="ending-header">
+        <p class="eyebrow">The Last Check-In · Check-out complete</p>
+
+        <h2 id="ending-title" tabindex="-1">
+            You checked out. The hotel remembers.
+        </h2>
+    </header>
+
+    <div class="ending-story">
+        <p>
+            The brass key turns. You push the emergency door open
+            and step into the cold night air.
+            Behind you, the lock clicks one last time.
+        </p>
+
+        <p>
+            The rain has stopped. You turn to look back,
+            but every window in the hotel is dark.
+        </p>
+
+        <p>
+            Something rustles inside your pocket.
+            It is the photograph from the drawer.
+            You don't remember taking it.
+        </p>
+
+        <p>
+            Now you notice the guest register in the photograph.
+            Beneath the date, 1926, is your name—
+            written in your own handwriting.
+        </p>
+
+        <p class="ending-whisper">
+            Somewhere inside the hotel, the reception bell rings.
+        </p>
+    </div>
+
+    <div class="ending-actions">
+        <p class="escape-message">
+            You found the key and escaped the reception.
+        </p>
+
+        <button type="button" id="restart-btn" class="primary-btn">
+            Play again
+        </button>
+    </div>
+
+    <footer class="ending-footer">
+        <p>Thank you for playing The Last Check-In.</p>
+        <p>A mystery by K.Sutar</p>
+    </footer>
+
+</section>
+</main>
+</body>
+</html>

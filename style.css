@@ -1,0 +1,550 @@
+:root {
+    --bg-dark: #100b0d;
+    --bg-burgundy: #32131e;
+    --text-main: #f3e8d8;
+    --text-muted: #c4b4aa;
+    --gold: #d3b477;
+    --gold-light: #ead2a3;
+    --border: rgba(211, 180, 119, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            ellipse at top,
+            var(--bg-burgundy),
+            var(--bg-dark) 75%
+        );
+    color: var(--text-main);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.7;
+}
+
+/* Keep hidden game elements hidden when we add layout styles. */
+[hidden] {
+    display: none !important;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--gold-light);
+    outline-offset: 5px;
+}
+
+/* ---------- Welcome screen ---------- */
+
+.welcome-screen {
+    width: min(100% - 2rem, 1100px);
+    min-height: 100vh;
+    margin-inline: auto;
+    padding-block: 2rem;
+    text-align: center;
+}
+
+.hotel-header {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.hotel-name {
+    color: var(--gold);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.hotel-tagline {
+    margin: 0.5rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.welcome-content {
+    max-width: 760px;
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vw, 6rem);
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+#welcome-title {
+    margin: 1rem 0 1.5rem;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: normal;
+    line-height: 1.1;
+}
+
+.welcome-description {
+    max-width: 540px;
+    margin: 0 auto 1.25rem;
+    font-size: clamp(1.05rem, 3vw, 1.3rem);
+}
+
+.welcome-story {
+    max-width: 570px;
+    margin: 0 auto 2rem;
+    color: var(--text-muted);
+}
+
+/* ---------- Shared primary button ---------- */
+
+.primary-btn {
+    display: inline-block;
+    max-width: 100%;
+    min-height: 48px;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    background: var(--gold);
+    color: var(--bg-dark);
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    transition: background-color 180ms ease;
+}
+
+.primary-btn:hover:not(:disabled) {
+    background: var(--gold-light);
+}
+
+.primary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.game-info {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+}
+
+/* ---------- Instructions and footer ---------- */
+
+.instructions {
+    max-width: 540px;
+    margin-inline: auto;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.instructions h2 {
+    margin: 0 0 0.75rem;
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.instructions ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--text-muted);
+}
+
+.instructions li + li {
+    margin-top: 0.5rem;
+}
+
+.instructions > p {
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+.welcome-footer {
+    padding-top: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+/* ---------- Reception layout ---------- */
+
+.reception-screen {
+    width: min(100% - 2rem, 1100px);
+    min-height: 100vh;
+    margin-inline: auto;
+    padding-block: 3rem;
+}
+
+.reception-header {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+#reception-title {
+    margin: 0.75rem 0 1rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.reception-description {
+    color: var(--text-muted);
+}
+
+.game-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.game-status p {
+    margin: 0;
+}
+
+.game-status strong {
+    color: var(--gold);
+}
+
+#key-status {
+    color: var(--text-muted);
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+/* ---------- Objects to investigate ---------- */
+
+.objects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.object-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: linear-gradient(145deg, #2b1920, #181014);
+    color: var(--text-main);
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition:
+        border-color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.object-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.object-name {
+    color: var(--gold-light);
+    font-size: 1.35rem;
+}
+
+.object-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Apply hover movement only to devices that support hovering. */
+@media (hover: hover) {
+    .object-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--gold);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ---------- Emergency exit ---------- */
+
+.exit-area {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+
+.exit-area p {
+    margin: 0 0 1.25rem;
+    color: var(--text-muted);
+}
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 600px) {
+    .reception-screen {
+        padding-block: 2rem;
+    }
+
+    .objects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .object-card {
+        padding: 1.5rem;
+    }
+
+    .game-status {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+}
+
+/* Respect the player's reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+    .object-card,
+    .primary-btn {
+        transition: none;
+    }
+
+    .object-card:hover {
+        transform: none;
+    }
+}
+/* ---------- Inspection popup ---------- */
+
+.inspection-dialog {
+    width: min( calc(100% - 2rem), 620px);
+    max-height: 85vh;
+    max-height: 85dvh;
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    background: #1c1117;
+    color: var(--text-main);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+
+.inspection-dialog::backdrop {
+    background: rgba(8, 5, 7, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.inspection-content {
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+#inspection-title {
+    margin: 0.5rem 0 1.5rem;
+    color: var(--gold-light);
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+/* A paper-like panel for the selected object's clue. */
+.inspection-details {
+    padding: 1.25rem;
+    border: 1px solid #c6ae85;
+    border-radius: 3px;
+    background: #eee0c5;
+    color: #30231e;
+    overflow-wrap: anywhere;
+}
+
+.inspection-details:empty {
+    display: none;
+}
+
+.inspection-details > :first-child {
+    margin-top: 0;
+}
+
+.inspection-details > :last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- Drawer code form ---------- */
+
+.drawer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.drawer-form label {
+    color: var(--gold-light);
+    font-size: 1.1rem;
+}
+
+#code-help {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+#drawer-code {
+    width: 100%;
+    min-height: 60px;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-dark);
+    color: var(--gold-light);
+    font-family: "Courier New", monospace;
+    font-size: 1.8rem;
+    letter-spacing: 0.4em;
+    text-align: center;
+}
+
+#drawer-code::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+.code-feedback {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.code-feedback:empty {
+    display: none;
+}
+
+/* ---------- Unlocked drawer contents ---------- */
+
+.drawer-reward {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.drawer-reward p {
+    color: var(--text-muted);
+}
+
+.drawer-reward .primary-btn {
+    margin-top: 0.5rem;
+}
+
+/* ---------- Secondary button ---------- */
+
+.secondary-btn {
+    min-height: 44px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--gold-light);
+    font-family: Arial, sans-serif;
+}
+
+.secondary-btn:hover {
+    border-color: var(--gold);
+    background: rgba(211, 180, 119, 0.08);
+}
+
+#close-inspection-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+/* ---------- Ending screen ---------- */
+
+.ending-screen {
+    width: min(100% - 2rem, 800px);
+    min-height: 100vh;
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vw, 6rem);
+    text-align: center;
+}
+
+.ending-header {
+    margin-bottom: 2.5rem;
+}
+
+#ending-title {
+    margin: 1rem 0;
+    color: var(--gold-light);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: normal;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+.ending-story {
+    max-width: 620px;
+    margin-inline: auto;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+}
+
+.ending-story p {
+    margin: 0 0 1.5rem;
+}
+
+.ending-story .ending-whisper {
+    margin-top: 2.5rem;
+    color: var(--gold-light);
+    font-style: italic;
+}
+
+.ending-actions {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.escape-message {
+    margin: 0 0 1.5rem;
+    color: var(--text-main);
+}
+
+.ending-footer {
+    margin-top: 3rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.ending-footer p {
+    margin: 0.25rem 0;
+}
+
+/* Keep buttons comfortable to use on narrow screens. */
+@media (max-width: 420px) {
+    .welcome-content .primary-btn,
+    .exit-area .primary-btn,
+    .ending-actions .primary-btn {
+        width: 100%;
+    }
+
+    .ending-story {
+        text-align: left;
+    }
+}
